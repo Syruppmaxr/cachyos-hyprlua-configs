@@ -1,0 +1,19 @@
+#!/bin/bash
+
+libre=$(printf \
+"Libreoffice Calc\0icon\x1f/home/jackson/.local/applications/icons/libreofficecalc.png
+Libreoffice Writer\0icon\x1f/home/jackson/.local/applications/icons/libreofficewriter.png
+Libreoffice Impress\0icon\x1f/home/jackson/.local/applications/icons/libreofficeimpress.png" \
+| fuzzel --dmenu --prompt=":Libre")
+
+case "$libre" in
+    "Libreoffice Calc")
+        libreoffice --calc
+        ;;
+    "Libreoffice Writer")
+        libreoffice --writer
+        ;;
+    "Libreoffice Impress")
+        libreoffice --impress
+        ;;
+esac

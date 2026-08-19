@@ -1,0 +1,9 @@
+#!/bin/bash
+
+monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
+
+if [ "$monitor" = "HDMI-A-1" ]; then
+    exec fuzzel --config ~/.config/fuzzel/tv.ini
+else
+    exec fuzzel --config ~/.config/fuzzel/monitor.ini
+fi

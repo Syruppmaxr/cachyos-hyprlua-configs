@@ -1,0 +1,20 @@
+#!/bin/bash
+
+monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
+
+if [ "$monitor" = "HDMI-A-1" ]; then
+    FUZZEL_CONFIG="$HOME/.config/fuzzel/tv.ini"
+else
+    FUZZEL_CONFIG="$HOME/.config/fuzzel/monitor.ini"
+fi
+
+provider=$(printf "Games\nLibre" | fuzzel --config "$FUZZEL_CONFIG" --dmenu --prompt="❯ ")
+
+case "$provider" in
+    Games)
+        ~/.local/bin/fuzzel/fuzzel-games
+        ;;
+
+    Libre)
+        ~/.local/bin/fuzzel/fuzzel-libre
+esac

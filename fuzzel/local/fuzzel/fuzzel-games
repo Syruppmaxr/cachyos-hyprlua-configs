@@ -1,0 +1,15 @@
+#!/bin/bash
+
+game=$(printf \
+"Steam\0icon\x1f/home/jackson/.local/applications/icons/steam.png
+Prism Launcher\0icon\x1f/home/jackson/.local/applications/icons/prismlauncher.png" \
+| fuzzel --dmenu --prompt=":Games")
+
+case "$game" in
+    Steam)
+        steam
+        ;;
+    "Prism Launcher")
+        prismlauncher
+        ;;
+esac
