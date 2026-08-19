@@ -25,6 +25,28 @@ hl.bind(mainMod .. " + Down",  hl.dsp.focus({ direction = "down" }),            
 hl.bind("ALT + Tab",           hl.dsp.window.cycle_next(),                                { description = "Cycle windows" })
 hl.bind(mainMod .. " + Tab",   hl.dsp.exec_cmd(noctCall .. "window-switcher"),            { description = "Window switcher" })
 
+-- Switch layouts
+hl.bind("SUPER + O", function()
+    local ws = hl.get_active_workspace()
+
+    if not ws then
+        return
+    end
+
+    if ws.tiled_layout == "dwindle" then
+        hl.workspace_rule({
+            workspace = tostring(ws.id),
+            layout = "scrolling",
+        })
+    else
+        hl.workspace_rule({
+            workspace = tostring(ws.id),
+            layout = "dwindle",
+        })
+    end
+end)
+
+
 -- Move active window around workspaces & monitors
 hl.bind(mainMod .. " + SHIFT + Right",           hl.dsp.window.move({ direction = "r" }),      { description = "Move window right" })
 hl.bind(mainMod .. " + SHIFT + Left",            hl.dsp.window.move({ direction = "l" }),      { description = "Move window left" })
@@ -56,8 +78,8 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { description = "Resi
 
 hl.bind(mainMod .. " + Return",     hl.dsp.exec_cmd(launchPrefix .. TERMINAL),                        { description = "Open terminal" })
 hl.bind(mainMod .. " + E",          hl.dsp.exec_cmd(launchPrefix .. FILE_MANAGER),                    { description = "Open file manager" })
-hl.bind(mainMod .. " + F1",          hl.dsp.exec_cmd(launchPrefix .. EDITOR),                          { description = "Open text editor" })
-hl.bind(mainMod .. " + C",         hl.dsp.exec_cmd(launchPrefix .. MD_EDITOR),                       { description = "Open markdown" })
+hl.bind(mainMod .. " + C",          hl.dsp.exec_cmd(launchPrefix .. EDITOR),                          { description = "Open text editor" })
+hl.bind(mainMod .. " + T",         hl.dsp.exec_cmd(launchPrefix .. MD_EDITOR),                       { description = "Open markdown" })
 hl.bind(mainMod .. " + SHIFT + C",  hl.dsp.exec_cmd(noctCall .. "panel-toggle noctalia/notes:panel"), { description = "Open Notes"})
 hl.bind(mainMod .. " + P",          hl.dsp.exec_cmd("kitty -e ncmpcpp"),                        { description = "Open Ncmpcpp" })
 hl.bind(mainMod .. " + W",          hl.dsp.exec_cmd(launchPrefix .. BROWSER),                   { description = "Open browser" })
